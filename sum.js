@@ -11,46 +11,56 @@ if (args.length < 2) {
   process.exit();
 }
 
+const allNums = function (numbers) {
+  for (let num of numbers) {
+    // edge case:  If any argument is not a number, output an error message.
+    if (isNaN(num)) {
+      console.log(`Error: please input only numbers`);
+      // stop the script
+      process.exit();
+      // break;
+    }
+  }
+
+  return numbers;
+};
+
 // goes through each
 // For Loop
 
 // c-style loop
 // for (let i = 0; i < args.length; i++) {}
+const sum = function (numbers) {
+  //accumulator
+  let total = 0;
 
-//accumulator
-let total = 0;
+  // for of => more readable
+  for (let nb of numbers) {
+    // convert the arg to a number => typecasting
+    const convertedNum = Number(nb);
 
-// for of => more readable
-for (let nb of args) {
-  // convert the arg to a number => typecasting
-  const convertedNum = Number(nb);
+    // edge case: If any argument is not a whole number, skip it.
+    // modulo => number % 1 == 0
+    // Number.isInteger
 
-  // edge case: If any argument is not a whole number, skip it.
-  // modulo => number % 1 == 0
-  // Number.isInteger
+    if (Number.isInteger(convertedNum)) {
+      total += convertedNum;
+      // total = total + convertedNum;
+    }
 
-  // edge case:  If any argument is not a number, output an error message.
-
-  if (isNaN(convertedNum)) {
-    console.log(`Error: please input only numbers`);
-    // stop the script
-    process.exit();
-    // break;
+    console.log(
+      'convertedNum',
+      convertedNum,
+      typeof convertedNum,
+      'total',
+      total
+    );
   }
 
-  if (Number.isInteger(convertedNum)) {
-    total += convertedNum;
-    // total = total + convertedNum;
-  }
+  // prints out the sum of them
+  return total;
+};
 
-  console.log(
-    'convertedNum',
-    convertedNum,
-    typeof convertedNum,
-    'total',
-    total
-  );
-}
+const result = sum(allNums(args));
 
-// prints out the sum of them
-console.log('Total:', total);
+console.log('result', result);
